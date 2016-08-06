@@ -121,7 +121,7 @@ class ControlJoystick : UIView {
             let parent = controlJoystick!.superview!
             
             if orientation.isPortrait {
-                controlJoystick!.center = CGPoint(x: parent.center.x, y: parent.center.y*1.6)
+                controlJoystick!.center = CGPoint(x: parent.center.x, y: parent.center.y*1.7)
             } else if orientation.isLandscape {
                 controlJoystick!.center = CGPoint(x: parent.center.x*1.33, y: parent.center.y*1.5)
             }

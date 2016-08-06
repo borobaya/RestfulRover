@@ -197,7 +197,7 @@ class ControlButtonsWASD : UIView {
             let parent = controlWASD!.superview!
             
             if orientation.isPortrait {
-                controlWASD!.center = CGPoint(x: parent.center.x, y: parent.center.y * 1.05)
+                controlWASD!.center = CGPoint(x: parent.center.x, y: parent.center.y * 1.2)
             } else if orientation.isLandscape {
                 controlWASD!.center = CGPoint(x: parent.center.x*0.66, y: parent.center.y*1.5)
             }

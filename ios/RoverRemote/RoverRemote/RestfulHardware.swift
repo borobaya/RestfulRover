@@ -12,8 +12,7 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
     
     let config = NSURLSessionConfiguration.defaultSessionConfiguration()
     var session : NSURLSession! = nil
-//    let baseUrl = "https://www.dropbox.com/s/ie0rwi5bynp2jkr/test.json?dl=1"
-    let baseUrl = "https://192.168.1.82:4004/"
+    let baseUrl = Config.roverUrl
     
     var callbackFunctions : [[String : Double] -> Void] = []
     
@@ -148,7 +147,7 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
                 return
             }
             guard response!.URL!.absoluteString.containsString(self.baseUrl) else {
-                print("[Warning] Response URL does not contain the base URL")
+                print("[Warning] Response URL does not contain the base URL:", response!.URL!.absoluteString)
                 return
             }
             guard data != nil else {
