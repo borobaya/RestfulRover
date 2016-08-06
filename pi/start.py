@@ -78,7 +78,7 @@ def main():
     
     try:
         print("Starting server...")
-        context = None #('ssl.crt', 'ssl.key')
+        context = ('ssl.crt', 'ssl.key')
         app.run(debug=True, host='0.0.0.0', port=4004, use_reloader=False, ssl_context=context)
     finally:
         print("\Exiting..")

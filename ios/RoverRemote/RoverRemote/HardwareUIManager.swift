@@ -38,13 +38,15 @@ class HardwareUIManager : NSObject {
         for (hardware_name, hardware_value) in hardwareValues {
             if controlSeparateList[hardware_name] != nil {
                 let control = controlSeparateList[hardware_name]!
-                control.valueWasUpdated(Int32(hardware_value))
+                dispatch_async(dispatch_get_main_queue(), {
+                    control.valueWasUpdated(Int32(hardware_value))
+                })
             }
         }
         
         // Remove UI controls if underlying hardware no longer exists
         for (hardware_name, _) in controlSeparateList {
-            if hardwareValues[hardware_name] == nil {
+            if hardwareValues.count > 1 && hardwareValues[hardware_name] == nil {
                 // hardware_name no longer exists on the actual hardware
                 controlSeparateList = ControlHardware.removeSingleUIControl(controlSeparateList, hardware_name: hardware_name)
                 
@@ -97,7 +99,7 @@ class HardwareUIManager : NSObject {
     func setTimer() {
         if timer == nil {
             timer = NSTimer.scheduledTimerWithTimeInterval(
-                1,
+                0.3,
                 target: self,
                 selector: #selector(timerFunc),
                 userInfo: nil,

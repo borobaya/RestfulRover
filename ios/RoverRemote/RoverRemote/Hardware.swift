@@ -51,6 +51,7 @@ class Hardware : NSObject {
         if hardware_type == "motor" && abs(target_value)<30 {
             target_value = 0
         }
+        updateValueOnTheHardware()
     }
     
     func get() -> Int32 {
@@ -73,11 +74,13 @@ class Hardware : NSObject {
             }
         }
         
-//        print("Changing", hardware_name, "value to:", target_value)
+//        print("Changing", hardware_name, "value from", value, "to", target_value)
         
         // Send write signal
         if restfulValueUpdateFunction != nil {
-            restfulValueUpdateFunction!(hardware_name, Double(target_value))
+            dispatch_async(dispatch_get_main_queue(), {
+                self.restfulValueUpdateFunction!(self.hardware_name, Double(self.target_value))
+            })
         }
     }
     
@@ -85,7 +88,7 @@ class Hardware : NSObject {
         self.actual_value = Int32(value)
 //        notifyFuncs()
         
-//        print("Value returned for hardaware", hardware_name, "of", self.actual_value)
+//        print("Value returned for hardware", hardware_name, "of", self.actual_value)
     }
     
 //    func addNotifyFunc(f : (Int32) -> Void) {

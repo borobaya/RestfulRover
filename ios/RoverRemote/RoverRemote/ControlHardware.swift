@@ -73,15 +73,21 @@ class ControlHardware : UIView {
     
     // Callback on value update
     func valueWasUpdated(newValue : Int32) {
-        if hardware.hardware_type=="motor" {
+        if hardware.hardware_type == "motor" {
             let slider = control as! UISlider
-            slider.value = Float(newValue)
-        } else if hardware.value_type=="binary" {
+            dispatch_async(dispatch_get_main_queue(), {
+                slider.value = Float(newValue)
+            })
+        } else if hardware.value_type == "binary" {
             let button = control as! UISwitch
-            button.setOn(newValue != 0, animated: true)
-        } else if hardware.value_type=="continuous" {
+            dispatch_async(dispatch_get_main_queue(), {
+                button.setOn(newValue != 0, animated: true)
+            })
+        } else if hardware.value_type == "continuous" {
             let value = control as! UILabel
-            value.text = String(newValue)
+            dispatch_async(dispatch_get_main_queue(), {
+                value.text = String(newValue)
+            })
         } else {
         }
     }

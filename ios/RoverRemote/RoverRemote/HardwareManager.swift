@@ -22,7 +22,10 @@ class HardwareManager : NSObject {
         super.init()
         restfulHardware.addCallbackFunction(valueUpdateCallback)
         
-        // Set up regular hardware updates
+        restfulHardware.refreshAllHardwareValues()
+        
+        // Set up regular hardware updates, to make sure everything is in sync
+        // Technically it should not be necessary
         self.setTimer()
     }
     
@@ -39,7 +42,7 @@ class HardwareManager : NSObject {
         
         // Remove hardware object if underlying hardware no longer exists
         for (hardware_name, _) in hardwares {
-            if hardwareValues[hardware_name] == nil {
+            if hardwareValues.count > 1 && hardwareValues[hardware_name] == nil {
                 // hardware_name no longer exists on the actual hardware
                 hardwares.removeValueForKey(hardware_name)
             }
@@ -53,7 +56,7 @@ class HardwareManager : NSObject {
     }
     
     func moveForward() {
-        print("Moving forward...")
+//        print("Moving forward...")
         
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
@@ -64,7 +67,7 @@ class HardwareManager : NSObject {
     }
     
     func moveBackward() {
-        print("Reversing...")
+//        print("Reversing...")
         
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
@@ -75,7 +78,7 @@ class HardwareManager : NSObject {
     }
     
     func rotateLeft() {
-        print("Rotating left...")
+//        print("Rotating left...")
         
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
@@ -86,7 +89,7 @@ class HardwareManager : NSObject {
     }
     
     func rotateRight() {
-        print("Rotating right...")
+//        print("Rotating right...")
         
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
@@ -97,7 +100,7 @@ class HardwareManager : NSObject {
     }
     
     func stop() {
-        print("Stopping...")
+//        print("Stopping...")
         
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
@@ -199,21 +202,8 @@ class HardwareManager : NSObject {
         }
     }
     
-    func updateAllHardwareValues() {
-//        print("Updating all hardware values..")
-        restfulHardware.updateHardwareList()
-    }
-    
     func timerFunc() {
-        let currentTime = NSDate().timeIntervalSince1970
-        
-        let hardwareListUpdateDiff = currentTime - restfulHardware.hardwareListLastUpdateTime
-        restfulHardware.handleInactiveHardwareListOngoingUpdateRequest()
-        
-        // Only update hardware list periodically
-        if hardwareListUpdateDiff >= 3 && restfulHardware.hardwareListOngoingUpdateRequestTime == nil {
-            updateAllHardwareValues()
-        }
+        restfulHardware.refreshAllHardwareValues()
         
         // Set hardware values on the hardware as often as they change
         for (_, hardware) in hardwares {
@@ -224,7 +214,7 @@ class HardwareManager : NSObject {
     func setTimer() {
         if timer == nil {
             timer = NSTimer.scheduledTimerWithTimeInterval(
-                0.5,
+                0.1,
                 target: self,
                 selector: #selector(timerFunc),
                 userInfo: nil,
