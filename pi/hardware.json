@@ -1,0 +1,36 @@
+[
+    {
+        "hardware_type": "motor", 
+        "args": {
+            "pinControl": 12,
+            "pinForward": 18,
+            "pinBackward": 16
+        }
+    }, 
+    {
+        "hardware_type": "motor", 
+        "args": {
+            "pinControl": 15,
+            "pinForward": 13,
+            "pinBackward": 11
+        }
+    }, 
+    {
+        "hardware_type": "led", 
+        "args": {
+            "pin": 0
+        }
+    }, 
+    {
+        "hardware_type": "infrared", 
+        "args": {
+            "pin": 0
+        }
+    }, 
+    {
+        "hardware_type": "battery", 
+        "args": {
+            "pin": 0
+        }
+    }
+]

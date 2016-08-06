@@ -1,0 +1,344 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		56003A1C1D4D211A00A6AC2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56003A1B1D4D211A00A6AC2F /* AppDelegate.swift */; };
+		56003A1E1D4D211A00A6AC2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56003A1D1D4D211A00A6AC2F /* ViewController.swift */; };
+		56003A211D4D211A00A6AC2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56003A1F1D4D211A00A6AC2F /* Main.storyboard */; };
+		56003A231D4D211A00A6AC2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56003A221D4D211A00A6AC2F /* Assets.xcassets */; };
+		56003A261D4D211A00A6AC2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56003A241D4D211A00A6AC2F /* LaunchScreen.storyboard */; };
+		56003A2E1D4D46C200A6AC2F /* RestfulHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56003A2D1D4D46C200A6AC2F /* RestfulHardware.swift */; };
+		56916B4F1D4FDC610093BD0C /* HardwareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B4E1D4FDC610093BD0C /* HardwareManager.swift */; };
+		56916B511D4FDCEA0093BD0C /* ControlButtonsWASD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B501D4FDCEA0093BD0C /* ControlButtonsWASD.swift */; };
+		56916B531D4FDD0E0093BD0C /* ControlJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B521D4FDD0E0093BD0C /* ControlJoystick.swift */; };
+		56916B551D4FDD360093BD0C /* ControlHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B541D4FDD360093BD0C /* ControlHardware.swift */; };
+		56916B571D4FDDF30093BD0C /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B561D4FDDF30093BD0C /* Hardware.swift */; };
+		56916B5B1D52967D0093BD0C /* HardwareUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */; };
+		56916B5D1D55E0150093BD0C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B5C1D55E0150093BD0C /* Helper.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		56003A181D4D211A00A6AC2F /* RoverRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoverRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		56003A1B1D4D211A00A6AC2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		56003A1D1D4D211A00A6AC2F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		56003A201D4D211A00A6AC2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		56003A221D4D211A00A6AC2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		56003A251D4D211A00A6AC2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		56003A271D4D211A00A6AC2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56003A2D1D4D46C200A6AC2F /* RestfulHardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestfulHardware.swift; sourceTree = "<group>"; };
+		56916B4E1D4FDC610093BD0C /* HardwareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareManager.swift; sourceTree = "<group>"; };
+		56916B501D4FDCEA0093BD0C /* ControlButtonsWASD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlButtonsWASD.swift; sourceTree = "<group>"; };
+		56916B521D4FDD0E0093BD0C /* ControlJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlJoystick.swift; sourceTree = "<group>"; };
+		56916B541D4FDD360093BD0C /* ControlHardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlHardware.swift; sourceTree = "<group>"; };
+		56916B561D4FDDF30093BD0C /* Hardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hardware.swift; sourceTree = "<group>"; };
+		56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareUIManager.swift; sourceTree = "<group>"; };
+		56916B5C1D55E0150093BD0C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		56003A151D4D211900A6AC2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		56003A0F1D4D211900A6AC2F = {
+			isa = PBXGroup;
+			children = (
+				56003A1A1D4D211A00A6AC2F /* RoverRemote */,
+				56003A191D4D211A00A6AC2F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		56003A191D4D211A00A6AC2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				56003A181D4D211A00A6AC2F /* RoverRemote.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		56003A1A1D4D211A00A6AC2F /* RoverRemote */ = {
+			isa = PBXGroup;
+			children = (
+				56916B591D4FDE040093BD0C /* Controls */,
+				56916B581D4FDDFD0093BD0C /* Hardware */,
+				56003A1B1D4D211A00A6AC2F /* AppDelegate.swift */,
+				56003A1D1D4D211A00A6AC2F /* ViewController.swift */,
+				56916B5C1D55E0150093BD0C /* Helper.swift */,
+				56003A1F1D4D211A00A6AC2F /* Main.storyboard */,
+				56003A221D4D211A00A6AC2F /* Assets.xcassets */,
+				56003A241D4D211A00A6AC2F /* LaunchScreen.storyboard */,
+				56003A271D4D211A00A6AC2F /* Info.plist */,
+			);
+			path = RoverRemote;
+			sourceTree = "<group>";
+		};
+		56916B581D4FDDFD0093BD0C /* Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				56916B4E1D4FDC610093BD0C /* HardwareManager.swift */,
+				56916B561D4FDDF30093BD0C /* Hardware.swift */,
+				56003A2D1D4D46C200A6AC2F /* RestfulHardware.swift */,
+			);
+			name = Hardware;
+			sourceTree = "<group>";
+		};
+		56916B591D4FDE040093BD0C /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				56916B541D4FDD360093BD0C /* ControlHardware.swift */,
+				56916B501D4FDCEA0093BD0C /* ControlButtonsWASD.swift */,
+				56916B521D4FDD0E0093BD0C /* ControlJoystick.swift */,
+				56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		56003A171D4D211900A6AC2F /* RoverRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56003A2A1D4D211A00A6AC2F /* Build configuration list for PBXNativeTarget "RoverRemote" */;
+			buildPhases = (
+				56003A141D4D211900A6AC2F /* Sources */,
+				56003A151D4D211900A6AC2F /* Frameworks */,
+				56003A161D4D211900A6AC2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RoverRemote;
+			productName = RoverRemote;
+			productReference = 56003A181D4D211A00A6AC2F /* RoverRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		56003A101D4D211900A6AC2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Muhammed Miah";
+				TargetAttributes = {
+					56003A171D4D211900A6AC2F = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 56003A131D4D211900A6AC2F /* Build configuration list for PBXProject "RoverRemote" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 56003A0F1D4D211900A6AC2F;
+			productRefGroup = 56003A191D4D211A00A6AC2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				56003A171D4D211900A6AC2F /* RoverRemote */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		56003A161D4D211900A6AC2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56003A261D4D211A00A6AC2F /* LaunchScreen.storyboard in Resources */,
+				56003A231D4D211A00A6AC2F /* Assets.xcassets in Resources */,
+				56003A211D4D211A00A6AC2F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		56003A141D4D211900A6AC2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56916B5B1D52967D0093BD0C /* HardwareUIManager.swift in Sources */,
+				56003A1E1D4D211A00A6AC2F /* ViewController.swift in Sources */,
+				56916B531D4FDD0E0093BD0C /* ControlJoystick.swift in Sources */,
+				56916B511D4FDCEA0093BD0C /* ControlButtonsWASD.swift in Sources */,
+				56916B4F1D4FDC610093BD0C /* HardwareManager.swift in Sources */,
+				56003A2E1D4D46C200A6AC2F /* RestfulHardware.swift in Sources */,
+				56003A1C1D4D211A00A6AC2F /* AppDelegate.swift in Sources */,
+				56916B5D1D55E0150093BD0C /* Helper.swift in Sources */,
+				56916B551D4FDD360093BD0C /* ControlHardware.swift in Sources */,
+				56916B571D4FDDF30093BD0C /* Hardware.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		56003A1F1D4D211A00A6AC2F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56003A201D4D211A00A6AC2F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		56003A241D4D211A00A6AC2F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				56003A251D4D211A00A6AC2F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		56003A281D4D211A00A6AC2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		56003A291D4D211A00A6AC2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		56003A2B1D4D211A00A6AC2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RoverRemote/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Momiah.RoverRemote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		56003A2C1D4D211A00A6AC2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RoverRemote/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Momiah.RoverRemote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		56003A131D4D211900A6AC2F /* Build configuration list for PBXProject "RoverRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56003A281D4D211A00A6AC2F /* Debug */,
+				56003A291D4D211A00A6AC2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		56003A2A1D4D211A00A6AC2F /* Build configuration list for PBXNativeTarget "RoverRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56003A2B1D4D211A00A6AC2F /* Debug */,
+				56003A2C1D4D211A00A6AC2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 56003A101D4D211900A6AC2F /* Project object */;
+}
