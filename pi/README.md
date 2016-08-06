@@ -38,6 +38,15 @@ openssl req \
 ```
 Note: This is a self-signed certificate
 
+## Usage
+
+Run the following command in this directory to start the RESTful API
+to control the Rover:
+
+```
+sudo python3 start.py
+```
+
 ## URLs
 
 At the IP address of the Raspberry Pi, the following URLs
