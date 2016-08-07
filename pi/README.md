@@ -7,7 +7,7 @@ Developed on Python 3, made for the Raspberry Pi
 
 ### Generic Raspberry Pi installation stuff
 
-```bash
+```shell
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y git python-pip python-all-dev
@@ -18,24 +18,26 @@ https://www.raspberrypi.org/documentation/remote-access/ssh/
 
 ### Python Webserver
 
-```bash
+```shell
 sudo apt-get install python3-flask
 sudo apt-get install python-rpi.gpio python3-rpi.gpio
 ```
 
 ### SSL certificate
 
-```bash
+```shell
 sudo apt-get -y install python3-pip
 sudo pip3 install Werkzeug --upgrade
 ```
 
 Go inside the pi directory, then:
-```
+
+```shell
 openssl req \
        -newkey rsa:2048 -nodes -keyout ssl.key \
        -x509 -days 365 -out ssl.crt
 ```
+
 Note: This is a self-signed certificate
 
 ## Usage
@@ -43,7 +45,7 @@ Note: This is a self-signed certificate
 Run the following command in this directory to start the RESTful API
 to control the Rover:
 
-```
+```shell
 sudo python3 start.py
 ```
 

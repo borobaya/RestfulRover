@@ -26,7 +26,7 @@ class HardwareManager : NSObject {
         
         // Set up regular hardware updates, to make sure everything is in sync
         // Technically it should not be necessary
-        self.setTimer()
+//        self.setTimer()
     }
     
     func valueUpdateCallback(hardwareValues : [String : Double]) {

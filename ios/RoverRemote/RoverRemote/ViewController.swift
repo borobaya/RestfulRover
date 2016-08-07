@@ -36,8 +36,7 @@ class ViewController: UIViewController {
         self.view.addSubview(statusLabel)
         
         // Set up Hardware UI Manager
-        hardwareUIManager.parent = self.view
-        
+        hardwareUIManager.setup(self.view)
     }
 
     override func didReceiveMemoryWarning() {

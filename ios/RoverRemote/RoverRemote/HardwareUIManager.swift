@@ -33,6 +33,16 @@ class HardwareUIManager : NSObject {
         setTimer()
     }
     
+    func setup(parent : UIView) {
+        self.parent = parent
+        
+        // Show camera
+        let mjpegView = MjpegView(frame: CGRect(x: 0, y: 55, width: parent.frame.width, height: parent.frame.width * 2/3))
+        mjpegView.start()
+        parent.addSubview(mjpegView)
+        
+    }
+    
     func valueUpdateCallback(hardwareValues : [String : Double]) {
         // Update UI values
         for (hardware_name, hardware_value) in hardwareValues {
@@ -76,10 +86,10 @@ class HardwareUIManager : NSObject {
             return
         }
         
-        (controlSeparate, controlSeparateList) = ControlHardware.updateUI(hardwareManager,
-                                                                          controlSeparate: controlSeparate,
-                                                                          controlSeparateList: controlSeparateList,
-                                                                          containerView: parent!)
+//        (controlSeparate, controlSeparateList) = ControlHardware.updateUI(hardwareManager,
+//                                                                          controlSeparate: controlSeparate,
+//                                                                          controlSeparateList: controlSeparateList,
+//                                                                          containerView: parent!)
         
         controlWASD = ControlButtonsWASD.updateUI(hardwareManager, controlWASD: controlWASD, containerView: parent!)
         controlJoystick = ControlJoystick.updateUI(hardwareManager, controlJoystick: controlJoystick, containerView: parent!)

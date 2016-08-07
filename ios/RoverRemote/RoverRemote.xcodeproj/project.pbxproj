@@ -21,6 +21,7 @@
 		56916B571D4FDDF30093BD0C /* Hardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B561D4FDDF30093BD0C /* Hardware.swift */; };
 		56916B5B1D52967D0093BD0C /* HardwareUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */; };
 		56916B5D1D55E0150093BD0C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B5C1D55E0150093BD0C /* Helper.swift */; };
+		56CB18641D57159D000DFA2D /* MjpegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CB18631D57159D000DFA2D /* MjpegView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		56916B561D4FDDF30093BD0C /* Hardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hardware.swift; sourceTree = "<group>"; };
 		56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareUIManager.swift; sourceTree = "<group>"; };
 		56916B5C1D55E0150093BD0C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		56CB18631D57159D000DFA2D /* MjpegView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MjpegView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		56003A1A1D4D211A00A6AC2F /* RoverRemote */ = {
 			isa = PBXGroup;
 			children = (
+				56CB18621D571552000DFA2D /* Camera */,
 				56916B591D4FDE040093BD0C /* Controls */,
 				56916B581D4FDDFD0093BD0C /* Hardware */,
 				56003A1B1D4D211A00A6AC2F /* AppDelegate.swift */,
@@ -105,6 +108,14 @@
 				56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */,
 			);
 			name = Controls;
+			sourceTree = "<group>";
+		};
+		56CB18621D571552000DFA2D /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				56CB18631D57159D000DFA2D /* MjpegView.swift */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56CB18641D57159D000DFA2D /* MjpegView.swift in Sources */,
 				56916B5B1D52967D0093BD0C /* HardwareUIManager.swift in Sources */,
 				56003A1E1D4D211A00A6AC2F /* ViewController.swift in Sources */,
 				56916B531D4FDD0E0093BD0C /* ControlJoystick.swift in Sources */,

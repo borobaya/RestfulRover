@@ -134,7 +134,6 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
             (data, response, error) -> Void in
             
             guard error == nil else {
-//                let url = error!.userInfo["NSErrorFailingURLStringKey"]
                 print(url, error)
                 return
             }
