@@ -13,6 +13,7 @@ class Hardware : NSObject {
     let hardware_name : String
     var actual_value : Int32 = 0
     var target_value : Int32 = 0
+    var last_sent_value : Int32 = 0
     
     let hardware_type : String
     let value_type : String
@@ -50,6 +51,8 @@ class Hardware : NSObject {
         target_value = value
         if hardware_type == "motor" && abs(target_value)<30 {
             target_value = 0
+        } else if hardware_type != "binary" && abs(target_value)<10 {
+            target_value = 0
         }
         updateValueOnTheHardware()
     }
@@ -59,27 +62,24 @@ class Hardware : NSObject {
     }
     
     func updateValueOnTheHardware() {
-        // Check for change in value
-        let value = get()
-        let change = abs(target_value-value)
-        if change==0 || target_value==actual_value {
+        if target_value==actual_value && target_value==last_sent_value {
             return
         }
+        
         if value_type != "binary" {
             // Stops sending too many messages, i.e. when user has finger continually pressed on control
-            if change < 5 {return}
-            
-            if abs(target_value)<10 {
-                target_value = 0
+            if abs(target_value-last_sent_value) < 5 {
+                return
             }
         }
         
-//        print("Changing", hardware_name, "value from", value, "to", target_value)
+//        print("Changing", hardware_name, "value from", actual_value, "to", target_value)
         
         // Send write signal
         if restfulValueUpdateFunction != nil {
             dispatch_async(dispatch_get_main_queue(), {
                 self.restfulValueUpdateFunction!(self.hardware_name, Double(self.target_value))
+                self.last_sent_value = self.target_value
             })
         }
     }

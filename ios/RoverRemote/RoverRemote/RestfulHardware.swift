@@ -12,16 +12,17 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
     
     let config = NSURLSessionConfiguration.defaultSessionConfiguration()
     var session : NSURLSession! = nil
-    let baseUrl = Config.roverUrl
+    let baseUrl = Config.restfulApiUrl
     
     var callbackFunctions : [[String : Double] -> Void] = []
     
     // Properties to help keep hardware values updated, without sending out too many requests
-    var allHardwareLastRefreshTime : NSTimeInterval? = nil
+    var allHardwareLastResponseTime : NSTimeInterval? = nil
     var allHardwareOngoingRequestTime : NSTimeInterval? = nil
     
-    var lastUpdateTimes : [String : NSTimeInterval] = [:]
+    var lastResponseTimes : [String : NSTimeInterval] = [:]
     var ongoingRequestTimes : [String : NSTimeInterval] = [:]
+    var ongoingRequests : [String : NSURLSessionDataTask] = [:]
     
     override init() {
         super.init()
@@ -37,25 +38,46 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
         call(url, callback: updateHardwareCallback)
     }
     func setHardwareValue(name: String, value: Double) {
-        let currentTime = NSDate().timeIntervalSince1970
+//        let currentTime = NSDate().timeIntervalSince1970
         removeInactiveOngoingRequests()
-      
-        if ongoingRequestTimes[name] == nil &&
-            (lastUpdateTimes[name] == nil || currentTime - lastUpdateTimes[name]! >= 0.2) {
-            
+        
+        // Cancel and replace the ongoing request for this hardware (if any)
+        // Otherwise the requests start queueing up too much
+        if ongoingRequests[name] != nil && ongoingRequests[name]!.state == .Running {
+//            print("Cancelling request for", name, ". New value:", value)
+            ongoingRequests[name]!.cancel()
+        }
+        
+//        let isOngoingRequestOccurring = ongoingRequestTimes[name] != nil
+//        let mostRecentResponseTime = lastResponseTimes[name]
+//        
+//        if !isOngoingRequestOccurring &&
+//            (mostRecentResponseTime == nil || currentTime - mostRecentResponseTime! >= 0.01) {
+        
 //            print("Setting", name, "to", String(value))
             let url = baseUrl + "hardware/" + name + "/set/" + String(value)
-            call(url, callback: updateHardwareCallback)
+            let task = call(url, callback: updateHardwareCallback)
             
             ongoingRequestTimes[name] = NSDate().timeIntervalSince1970
-        }
+            ongoingRequests[name] = task
+//        } else if mostRecentResponseTime != nil {
+//            print("Last request occurred", currentTime - mostRecentResponseTime!, "seconds ago")
+//        }
     }
     func refreshAllHardwareValues() {
         let currentTime = NSDate().timeIntervalSince1970
         removeInactiveOngoingRequests()
         
-        if allHardwareOngoingRequestTime == nil &&
-            (allHardwareLastRefreshTime == nil || currentTime - allHardwareLastRefreshTime! >= 1) {
+        let isAnyOngoingRequestOccurring = allHardwareOngoingRequestTime != nil || ongoingRequestTimes.count > 1
+        var mostRecentResponseTime = allHardwareLastResponseTime
+        for (_, time) in lastResponseTimes {
+            if mostRecentResponseTime == nil || time > mostRecentResponseTime {
+                mostRecentResponseTime = time
+            }
+        }
+        
+        if !isAnyOngoingRequestOccurring &&
+            (mostRecentResponseTime == nil || currentTime - mostRecentResponseTime! >= 1) {
             
             let url = baseUrl + "hardware/"
             call(url, callback: updateHardwareListCallback)
@@ -75,7 +97,7 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
         // Refresh last update times
         let currentTime = NSDate().timeIntervalSince1970
         for (hardware_name, _) in hardwareValues {
-            lastUpdateTimes[hardware_name] = currentTime
+            lastResponseTimes[hardware_name] = currentTime
             
             // The last time the value was sent to the hardware
             if ongoingRequestTimes[hardware_name] != nil {
@@ -94,12 +116,12 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
         // Reset last update times for the individual hardware
         let currentTime = NSDate().timeIntervalSince1970
         for (hardware_name, _) in hardwareValues {
-            lastUpdateTimes[hardware_name] = currentTime
+            lastResponseTimes[hardware_name] = currentTime
         }
         
         // Reset last update times for the full hardware list
         if hardwareValues.count > 1 {
-            allHardwareLastRefreshTime = NSDate().timeIntervalSince1970
+            allHardwareLastResponseTime = NSDate().timeIntervalSince1970
             allHardwareOngoingRequestTime = nil
         }
     }
@@ -128,13 +150,17 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
         return hardwareValues
     }
     
-    func call(url: String, callback: (String, AnyObject) -> Void) {
+    func call(url: String, callback: (String, AnyObject) -> Void) -> NSURLSessionDataTask {
         let urlRequest = NSURLRequest(URL: NSURL(string: url)!)
         let task = session.dataTaskWithRequest(urlRequest) {
             (data, response, error) -> Void in
             
             guard error == nil else {
-                print(url, error)
+                if error!.code == -999 {
+//                    print(url, "cancelled")
+                } else {
+                    print(url, error)
+                }
                 return
             }
             guard response != nil else {
@@ -189,8 +215,10 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
             let url_minus_base = response!.URL!.absoluteString.substringFromIndex(self.baseUrl.endIndex)
             
             callback(url_minus_base, json!)
+            
         }
         task.resume()
+        return task
     }
     
     func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {

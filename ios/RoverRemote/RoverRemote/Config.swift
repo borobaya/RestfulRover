@@ -9,6 +9,12 @@
 import Foundation
 
 class Config {
-//    static let roverUrl = "https://www.dropbox.com/s/ie0rwi5bynp2jkr/test.json?dl=1"
-    static let roverUrl = "https://192.168.1.82/"
+    
+    static private let roverIPAddress = "192.168.1.82"
+    
+    static let restfulApiUrl = "https://" + roverIPAddress + "/"
+    static let uv4lUrl = "http://" + roverIPAddress + ":8080/"
+    
+    
+    
 }

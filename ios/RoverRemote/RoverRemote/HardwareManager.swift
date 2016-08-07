@@ -61,8 +61,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(100)
-            rightMotor?.set(100)
+            leftMotor!.set(100)
+            rightMotor!.set(100)
         }
     }
     
@@ -72,8 +72,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(-100)
-            rightMotor?.set(-100)
+            leftMotor!.set(-100)
+            rightMotor!.set(-100)
         }
     }
     
@@ -83,8 +83,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(-100)
-            rightMotor?.set(100)
+            leftMotor!.set(-100)
+            rightMotor!.set(100)
         }
     }
     
@@ -94,8 +94,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(100)
-            rightMotor?.set(-100)
+            leftMotor!.set(100)
+            rightMotor!.set(-100)
         }
     }
     
@@ -105,8 +105,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(0)
-            rightMotor?.set(0)
+            leftMotor!.set(0)
+            rightMotor!.set(0)
         }
     }
     
@@ -116,8 +116,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(100)
-            rightMotor?.set(60)
+            leftMotor!.set(100)
+            rightMotor!.set(60)
         }
     }
     
@@ -127,8 +127,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(60)
-            rightMotor?.set(100)
+            leftMotor!.set(60)
+            rightMotor!.set(100)
         }
     }
     
@@ -138,8 +138,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(-100)
-            rightMotor?.set(-60)
+            leftMotor!.set(-100)
+            rightMotor!.set(-60)
         }
     }
     
@@ -149,8 +149,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(-60)
-            rightMotor?.set(-100)
+            leftMotor!.set(-60)
+            rightMotor!.set(-100)
         }
     }
     
@@ -197,8 +197,8 @@ class HardwareManager : NSObject {
         let leftMotor = hardwares["motor-0"]
         let rightMotor = hardwares["motor-1"]
         if leftMotor != nil && rightMotor != nil {
-            leftMotor?.set(Int32(leftMotorPower))
-            rightMotor?.set(Int32(rightMotorPower))
+            leftMotor!.set(Int32(leftMotorPower))
+            rightMotor!.set(Int32(rightMotorPower))
         }
     }
     

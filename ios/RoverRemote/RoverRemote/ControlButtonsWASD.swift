@@ -92,7 +92,7 @@ class ControlButtonsWASD : UIView {
     }
     
     func controlButtonPressed(sender:UIButton!) {
-        // print("WASD button", sender.tag, "pressed")
+//         print("WASD button", sender.tag, "pressed")
         
         switch sender.tag {
         case 1:
@@ -110,7 +110,7 @@ class ControlButtonsWASD : UIView {
     }
     
     func controlButtonReleased(sender:UIButton!) {
-        // print("WASD button", sender.tag, "released")
+//         print("WASD button", sender.tag, "released")
         
         switch sender.tag {
         case 1:

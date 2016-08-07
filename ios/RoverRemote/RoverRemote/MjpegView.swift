@@ -11,7 +11,7 @@ import UIKit
 
 class MjpegView : UIImageView, NSURLSessionDataDelegate {
     
-    let uv4lServer = "http://192.168.1.82:8080/"
+    let uv4lServer = Config.uv4lUrl
     let urlResizeRequest = "panel?width=160&height=120&format=875967048"
     let urlMjpegStream = "stream/video.mjpeg"
     

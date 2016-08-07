@@ -27,7 +27,7 @@ class ControlJoystick : UIView {
         let width = min(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
         
         // Set bounds of view so that touch events are received correctly
-        self.bounds = CGRect(x: 0, y: 0, width: width*0.3, height: width*0.3)
+        self.bounds = CGRect(x: 0, y: 0, width: width*0.5, height: width*0.5)
         self.backgroundColor = UIColor.blackColor()
         
         let background = UIImageView(image: UIImage(named: "JoystickBackground"))
