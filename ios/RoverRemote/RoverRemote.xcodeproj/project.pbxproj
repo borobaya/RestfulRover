@@ -14,6 +14,8 @@
 		56003A261D4D211A00A6AC2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56003A241D4D211A00A6AC2F /* LaunchScreen.storyboard */; };
 		56003A2E1D4D46C200A6AC2F /* RestfulHardware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56003A2D1D4D46C200A6AC2F /* RestfulHardware.swift */; };
 		562085B61D56972D0082B659 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562085B51D56972D0082B659 /* Config.swift */; };
+		5653060F1D5D21B600DEEC25 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5653060D1D5D21B600DEEC25 /* Settings.plist */; };
+		565306101D5D21B600DEEC25 /* PlistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5653060E1D5D21B600DEEC25 /* PlistManager.swift */; };
 		56916B4F1D4FDC610093BD0C /* HardwareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B4E1D4FDC610093BD0C /* HardwareManager.swift */; };
 		56916B511D4FDCEA0093BD0C /* ControlButtonsWASD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B501D4FDCEA0093BD0C /* ControlButtonsWASD.swift */; };
 		56916B531D4FDD0E0093BD0C /* ControlJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56916B521D4FDD0E0093BD0C /* ControlJoystick.swift */; };
@@ -34,6 +36,8 @@
 		56003A271D4D211A00A6AC2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56003A2D1D4D46C200A6AC2F /* RestfulHardware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestfulHardware.swift; sourceTree = "<group>"; };
 		562085B51D56972D0082B659 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		5653060D1D5D21B600DEEC25 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
+		5653060E1D5D21B600DEEC25 /* PlistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlistManager.swift; sourceTree = "<group>"; };
 		56916B4E1D4FDC610093BD0C /* HardwareManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HardwareManager.swift; sourceTree = "<group>"; };
 		56916B501D4FDCEA0093BD0C /* ControlButtonsWASD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlButtonsWASD.swift; sourceTree = "<group>"; };
 		56916B521D4FDD0E0093BD0C /* ControlJoystick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlJoystick.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 		56003A1A1D4D211A00A6AC2F /* RoverRemote */ = {
 			isa = PBXGroup;
 			children = (
+				5653060C1D5D21AB00DEEC25 /* Data */,
 				56CB18621D571552000DFA2D /* Camera */,
 				56916B591D4FDE040093BD0C /* Controls */,
 				56916B581D4FDDFD0093BD0C /* Hardware */,
@@ -89,6 +94,15 @@
 			path = RoverRemote;
 			sourceTree = "<group>";
 		};
+		5653060C1D5D21AB00DEEC25 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				5653060D1D5D21B600DEEC25 /* Settings.plist */,
+				5653060E1D5D21B600DEEC25 /* PlistManager.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		56916B581D4FDDFD0093BD0C /* Hardware */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,10 +116,10 @@
 		56916B591D4FDE040093BD0C /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */,
 				56916B541D4FDD360093BD0C /* ControlHardware.swift */,
 				56916B501D4FDCEA0093BD0C /* ControlButtonsWASD.swift */,
 				56916B521D4FDD0E0093BD0C /* ControlJoystick.swift */,
-				56916B5A1D52967D0093BD0C /* HardwareUIManager.swift */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -179,6 +193,7 @@
 			files = (
 				56003A261D4D211A00A6AC2F /* LaunchScreen.storyboard in Resources */,
 				56003A231D4D211A00A6AC2F /* Assets.xcassets in Resources */,
+				5653060F1D5D21B600DEEC25 /* Settings.plist in Resources */,
 				56003A211D4D211A00A6AC2F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,6 +217,7 @@
 				56916B5D1D55E0150093BD0C /* Helper.swift in Sources */,
 				56916B551D4FDD360093BD0C /* ControlHardware.swift in Sources */,
 				56916B571D4FDDF30093BD0C /* Hardware.swift in Sources */,
+				565306101D5D21B600DEEC25 /* PlistManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

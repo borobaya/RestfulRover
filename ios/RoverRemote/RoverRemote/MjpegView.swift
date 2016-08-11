@@ -12,11 +12,13 @@ import UIKit
 class MjpegView : UIImageView, NSURLSessionDataDelegate {
     
     let uv4lServer = Config.uv4lUrl
-    let urlResizeRequest = "panel?width=160&height=120&format=875967048"
+    let urlResizeRequest = "panel?width=60&height=40&format=875967048&134217741=10" // Last parameter is the framerate
     let urlMjpegStream = "stream/video.mjpeg"
     
     var endMarkerData = NSData()
     var receivedData = NSMutableData()
+    
+    var task : NSURLSessionDataTask?
     
     override init(frame : CGRect) {
         //self.frame = CGRect(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height-60)
@@ -33,56 +35,68 @@ class MjpegView : UIImageView, NSURLSessionDataDelegate {
     }
     
     func start() {
-        // Edit width and height, so streaming is not too slow
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
-        
-        let url = uv4lServer + urlResizeRequest
-        let request = NSURLRequest(URL: NSURL(string: url)!)
-        let task = session.dataTaskWithRequest(request) {
-            (data, response, error) -> Void in
+        if task?.state != .Running {
+            // Edit width and height, so streaming is not too slow
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
             
-            guard error == nil else {
-                print(url, error)
-                return
+            let url = uv4lServer + urlResizeRequest
+            let request = NSURLRequest(URL: NSURL(string: url)!)
+            task = session.dataTaskWithRequest(request) {
+                (data, response, error) -> Void in
+                
+                guard error == nil else {
+                    if error!.code == -999 {
+                        //print(url, "cancelled")
+                    } else {
+                        print(url, error!)
+                    }
+                    return
+                }
+                guard response != nil else {
+                    print("[Warning] No response")
+                    return
+                }
+                guard data != nil else {
+                    print("[Warning] No data")
+                    return
+                }
+                
+                let httpResponse = response as! NSHTTPURLResponse
+                let statusCode = httpResponse.statusCode
+                
+                guard statusCode == 200 else {
+                    print("[Warning] Status code " + String(statusCode))
+                    return
+                }
+                
+                // Now asynchronously connect to the MJPEG stream
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.startMjpegStream()
+                }
             }
-            guard response != nil else {
-                print("[Warning] No response")
-                return
-            }
-            guard data != nil else {
-                print("[Warning] No data")
-                return
-            }
-            
-            let httpResponse = response as! NSHTTPURLResponse
-            let statusCode = httpResponse.statusCode
-            
-            guard statusCode == 200 else {
-                print("[Warning] Status code " + String(statusCode))
-                return
-            }
-            
-            // Now asynchronously connect to the MJPEG stream
-            dispatch_async(dispatch_get_main_queue()) {
-                self.startMjpegStream()
-            }
+            task!.resume()
         }
-        task.resume()
     }
     
-    func startMjpegStream(){
+    func startMjpegStream() {
         // http://stackoverflow.com/questions/26692617/ios-and-live-streaming-mjpeg
         // https://github.com/mateagar/Motion-JPEG-Image-View-for-iOS/blob/master/MotionJpegImageView/MotionJpegImageView.mm
         // http://www.stefanovettor.com/2016/03/30/ios-mjpeg-streaming/
         
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
-        
-        let url = uv4lServer + urlMjpegStream
-        let request = NSURLRequest(URL: NSURL(string: url)!)
-        let task = session.dataTaskWithRequest(request)
-        task.resume()
+        if task?.state != .Running {
+            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
+            
+            let url = uv4lServer + urlMjpegStream
+            let request = NSURLRequest(URL: NSURL(string: url)!)
+            task = session.dataTaskWithRequest(request)
+            task!.resume()
+        }
+    }
+    
+    func stop() {
+        task?.cancel()
     }
     
     func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {

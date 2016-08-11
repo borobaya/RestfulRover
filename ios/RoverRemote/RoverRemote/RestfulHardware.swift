@@ -12,13 +12,13 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
     
     let config = NSURLSessionConfiguration.defaultSessionConfiguration()
     var session : NSURLSession! = nil
-    let baseUrl = Config.restfulApiUrl
     
     var callbackFunctions : [[String : Double] -> Void] = []
     
     // Properties to help keep hardware values updated, without sending out too many requests
     var allHardwareLastResponseTime : NSTimeInterval? = nil
     var allHardwareOngoingRequestTime : NSTimeInterval? = nil
+    var allHardwareRequest : NSURLSessionDataTask? = nil
     
     var lastResponseTimes : [String : NSTimeInterval] = [:]
     var ongoingRequestTimes : [String : NSTimeInterval] = [:]
@@ -29,24 +29,33 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
         session = NSURLSession(configuration: self.config, delegate: self, delegateQueue: nil)
     }
     
+    func reset() {
+        allHardwareRequest?.cancel()
+        for (_, task) in ongoingRequests {
+            task.cancel()
+        }
+        
+        allHardwareLastResponseTime = nil
+        allHardwareOngoingRequestTime = nil
+        allHardwareRequest = nil
+        lastResponseTimes.removeAll(keepCapacity: true)
+        ongoingRequestTimes.removeAll(keepCapacity: true)
+        ongoingRequests.removeAll(keepCapacity: true)
+        
+        // Note: Do not reset callbackFunctions
+    }
+    
     func addCallbackFunction(f : [String : Double] -> Void) {
         callbackFunctions.append(f)
     }
     
     func getHardwareValue(name: String) {
-        let url = baseUrl + "hardware/" + name + "/"
+        let url = Config.restfulApiUrl + name + "/"
         call(url, callback: updateHardwareCallback)
     }
     func setHardwareValue(name: String, value: Double) {
 //        let currentTime = NSDate().timeIntervalSince1970
         removeInactiveOngoingRequests()
-        
-        // Cancel and replace the ongoing request for this hardware (if any)
-        // Otherwise the requests start queueing up too much
-        if ongoingRequests[name] != nil && ongoingRequests[name]!.state == .Running {
-//            print("Cancelling request for", name, ". New value:", value)
-            ongoingRequests[name]!.cancel()
-        }
         
 //        let isOngoingRequestOccurring = ongoingRequestTimes[name] != nil
 //        let mostRecentResponseTime = lastResponseTimes[name]
@@ -54,8 +63,15 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
 //        if !isOngoingRequestOccurring &&
 //            (mostRecentResponseTime == nil || currentTime - mostRecentResponseTime! >= 0.01) {
         
-//            print("Setting", name, "to", String(value))
-            let url = baseUrl + "hardware/" + name + "/set/" + String(value)
+            // Cancel and replace the ongoing request for this hardware (if any)
+            // Otherwise the requests start queueing up too much
+            if ongoingRequests[name] != nil && ongoingRequests[name]!.state == .Running {
+                //print("Cancelling request for", name, ". New value:", value)
+                ongoingRequests[name]!.cancel()
+            }
+        
+            //print("Setting", name, "to", String(value))
+            let url = Config.restfulApiUrl + name + "/set/" + String(value)
             let task = call(url, callback: updateHardwareCallback)
             
             ongoingRequestTimes[name] = NSDate().timeIntervalSince1970
@@ -79,8 +95,13 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
         if !isAnyOngoingRequestOccurring &&
             (mostRecentResponseTime == nil || currentTime - mostRecentResponseTime! >= 1) {
             
-            let url = baseUrl + "hardware/"
-            call(url, callback: updateHardwareListCallback)
+            // Cancel any ongoing request
+            if allHardwareRequest?.state == .Running {
+                allHardwareRequest!.cancel()
+            }
+            
+            let url = Config.restfulApiUrl
+            allHardwareRequest = call(url, callback: updateHardwareListCallback)
             
             allHardwareOngoingRequestTime = NSDate().timeIntervalSince1970
         }
@@ -157,9 +178,9 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
             
             guard error == nil else {
                 if error!.code == -999 {
-//                    print(url, "cancelled")
+                    //print(url, "cancelled")
                 } else {
-                    print(url, error)
+                    print(url, error!)
                 }
                 return
             }
@@ -171,7 +192,7 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
                 print("[Warning] Response has no associated URL")
                 return
             }
-            guard response!.URL!.absoluteString.containsString(self.baseUrl) else {
+            guard response!.URL!.absoluteString.containsString(Config.restfulApiUrl) else {
                 print("[Warning] Response URL does not contain the base URL:", response!.URL!.absoluteString)
                 return
             }
@@ -212,7 +233,7 @@ class RestfulHardware : NSObject, NSURLSessionDataDelegate {
                 return
             }
             
-            let url_minus_base = response!.URL!.absoluteString.substringFromIndex(self.baseUrl.endIndex)
+            let url_minus_base = response!.URL!.absoluteString.substringFromIndex(Config.restfulApiUrl.endIndex)
             
             callback(url_minus_base, json!)
             

@@ -10,11 +10,16 @@ import Foundation
 
 class Config {
     
-    static private let roverIPAddress = "192.168.1.82"
+    static private var roverIPAddress = "" //Config.updateRoverIPAddress("192.168.1.82")
     
-    static let restfulApiUrl = "https://" + roverIPAddress + "/"
-    static let uv4lUrl = "http://" + roverIPAddress + ":8080/"
+    static var restfulApiUrl = ""
+    static var uv4lUrl = ""
     
-    
-    
+    static func updateRoverIPAddress(address : String) -> String {
+        self.roverIPAddress = address
+        self.restfulApiUrl = "https://" + roverIPAddress + "/hardware/"
+        self.uv4lUrl = "http://" + roverIPAddress + ":8080/"
+        return address
+    }
+
 }

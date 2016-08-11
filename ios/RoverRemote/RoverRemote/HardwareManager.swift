@@ -21,12 +21,21 @@ class HardwareManager : NSObject {
     override init() {
         super.init()
         restfulHardware.addCallbackFunction(valueUpdateCallback)
-        
+    }
+    
+    func setup() {
         restfulHardware.refreshAllHardwareValues()
         
         // Set up regular hardware updates, to make sure everything is in sync
         // Technically it should not be necessary
 //        self.setTimer()
+    }
+    
+    func reset() {
+        removeTimer()
+        restfulHardware.reset()
+        
+        hardwares.removeAll(keepCapacity: true)
     }
     
     func valueUpdateCallback(hardwareValues : [String : Double]) {
@@ -48,11 +57,6 @@ class HardwareManager : NSObject {
             }
         }
         
-    }
-    
-    func clearAllHardware() {
-        hardwares.removeAll(keepCapacity: true)
-        removeTimer()
     }
     
     func moveForward() {

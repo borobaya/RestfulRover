@@ -22,25 +22,28 @@ class HardwareUIManager : NSObject {
     var controlSeparate : UIView?
     var controlSeparateList : [String : ControlHardware] = [:]
     
+    // Camera
+    var mjpegView : MjpegView?
+    
     // Set up regular updates
     var timer : NSTimer? = nil
     
     override init() {
         super.init()
         hardwareManager.restfulHardware.addCallbackFunction(valueUpdateCallback)
-        
-        // Set up regular hardware updates
-        setTimer()
     }
     
     func setup(parent : UIView) {
         self.parent = parent
         
-        // Show camera
-        let mjpegView = MjpegView(frame: CGRect(x: 0, y: 55, width: parent.frame.width, height: parent.frame.width * 2/3))
-        mjpegView.start()
-        parent.addSubview(mjpegView)
+        // Camera
+        removeCamera()
+        addCamera()
         
+        // Set up regular hardware updates
+        setTimer()
+        
+        hardwareManager.setup()
     }
     
     func valueUpdateCallback(hardwareValues : [String : Double]) {
@@ -67,19 +70,7 @@ class HardwareUIManager : NSObject {
             }
         }
     }
-    
-    func clearAllHardware() {
-        (controlSeparate, controlSeparateList) =  ControlHardware.removeAllUIControls(
-            controlSeparate, controlSeparateList: controlSeparateList)
-        
-        controlWASD?.removeFromSuperview()
-        controlWASD = nil
-        
-        controlJoystick?.removeFromSuperview()
-        controlJoystick = nil
-        
-        hardwareManager.clearAllHardware()
-    }
+
     
     func updateUI() {
         if parent==nil {
@@ -99,6 +90,21 @@ class HardwareUIManager : NSObject {
         ControlHardware.repositionUI(controlSeparate)
         ControlButtonsWASD.repositionUI(controlWASD)
         ControlJoystick.repositionUI(controlJoystick)
+    }
+    
+    func removeUI() {
+        removeTimer()
+        removeCamera()
+        hardwareManager.reset()
+        
+        (controlSeparate, controlSeparateList) =  ControlHardware.removeAllUIControls(
+            controlSeparate, controlSeparateList: controlSeparateList)
+        
+        controlWASD?.removeFromSuperview()
+        controlWASD = nil
+        
+        controlJoystick?.removeFromSuperview()
+        controlJoystick = nil
     }
     
     
@@ -125,5 +131,24 @@ class HardwareUIManager : NSObject {
     }
     
     
+    func addCamera() {
+        // Show camera
+        if mjpegView == nil && parent != nil {
+            mjpegView = MjpegView(frame: CGRect(x: 0, y: 80, width: parent!.frame.width, height: parent!.frame.width * 2/3))
+            mjpegView!.start()
+            parent!.addSubview(mjpegView!)
+        }
+    }
+    
+    func removeCamera() {
+        // Stop camera if it's ON
+        if mjpegView != nil {
+            mjpegView!.stop()
+            if mjpegView!.superview != nil {
+                mjpegView!.removeFromSuperview()
+            }
+            mjpegView = nil
+        }
+    }
     
 }
