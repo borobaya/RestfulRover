@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import time
-import os
+import os, sys
 from controller import Controller
 from flask import Flask, request
 from pprint import pformat
@@ -72,17 +72,19 @@ def main():
     # Sanity check
     if os.geteuid() != 0:
         print("Warning: Need administrator privileges to access onboard pins! Use 'sudo'.")
-    
-    # Initialise
-    server = Server()
+        return
     
     try:
+        # Initialise
+        server = Server()
+    
         print("Starting server...")
         context = ('ssl.crt', 'ssl.key')
         app.run(debug=True, host='0.0.0.0', port=443, use_reloader=False, ssl_context=context)
     finally:
         print("\Exiting..")
         server.cleanup()
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()

@@ -3,12 +3,25 @@
 
 from hardware import HardwareHandler
 import json
+import threading
 
 class Controller():
     """Controller"""
     def __init__(self):
         self.HardwareHandler = HardwareHandler()
         self.load("hardware.json")
+        self.timer = None
+
+    def scheduleReset(self):
+        if self.timer is not None:
+            self.timer.cancel()
+        self.timer = threading.Timer(5, self.reset)
+        self.timer.start()
+
+    def reset(self):
+        # print("Resetting...")
+        for h in self.HardwareHandler.list():
+            self.HardwareHandler.set(h, float(0))
 
     def load(self, filename):
         with open(filename) as f:
@@ -18,7 +31,7 @@ class Controller():
                 self.HardwareHandler.add(hardware_type, h['args'])
 
     def process(self, msg):
-        print('Received message: %s' % (msg))
+        # print('Received message: %s' % (msg))
         msg_parts = msg.split()
         resps = {}
 
@@ -67,6 +80,7 @@ class Controller():
                     resp['value'] = hardware_value
                     resps[hardware_name] = resp
 
+        self.scheduleReset()
         return resps
 
     def cleanup(self):
