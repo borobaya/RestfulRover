@@ -7,7 +7,7 @@ Developed on Python 3, made for the Raspberry Pi
 
 ### Generic Raspberry Pi installation stuff
 
-To set up WiFi, chack
+To set up WiFi, check
 https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
 ```shell
