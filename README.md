@@ -12,6 +12,7 @@ git clone https://github.com/momiah/RestfulRover.git
 See the README.md file in the pi folder.
 
 To find the local IP address, use `sudo ifconfig wlan0`
+
 To find the external IP address, you can use `curl icanhazip.com`
 
 Note that to be able to control the rover from anywhere in the world, you
