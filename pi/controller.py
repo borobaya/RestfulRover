@@ -4,6 +4,7 @@
 from hardware import HardwareHandler
 import json
 import threading
+import logger
 
 class Controller():
     """Controller"""
@@ -19,7 +20,7 @@ class Controller():
         self.timer.start()
 
     def reset(self):
-        # print("Resetting...")
+        logger.info("Resetting...")
         for h in self.HardwareHandler.list():
             self.HardwareHandler.set(h, float(0))
 
@@ -31,7 +32,7 @@ class Controller():
                 self.HardwareHandler.add(hardware_type, h['args'])
 
     def process(self, msg):
-        # print('Received message: %s' % (msg))
+        logger.log('Received message: %s' % (msg))
         msg_parts = msg.split()
         resps = {}
 

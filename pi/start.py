@@ -7,6 +7,7 @@ from controller import Controller
 from flask import Flask, request
 from pprint import pformat
 import json
+import logger
 
 app = Flask(__name__)
 server = None
@@ -57,7 +58,7 @@ class Server():
     """Server"""
     def __init__(self):
         self.controller = Controller()
-        print("Hardware initialisation completed")
+        logger.info("Hardware initialisation completed")
     
     def send_message(self, msg):
         return self.controller.process(msg)
@@ -71,20 +72,25 @@ def main():
     
     # Sanity check
     if os.geteuid() != 0:
-        print("Warning: Need administrator privileges to access onboard pins! Use 'sudo'.")
+        logger.info("Warning: Need administrator privileges to access onboard pins! Use 'sudo'.")
         return
     
     try:
         # Initialise
         server = Server()
     
-        print("Starting server...")
+        logger.info("Starting server...")
         context = ('ssl.crt', 'ssl.key')
         app.run(debug=True, host='0.0.0.0', port=443, use_reloader=False, ssl_context=context)
+    except Exception as e:
+        logger.error(str(e) + (e.args))
     finally:
-        print("\Exiting..")
+        logger.info("Exiting...")
         server.cleanup()
         sys.exit(0)
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        logger.error(str(e) + (e.args))

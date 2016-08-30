@@ -13,7 +13,8 @@ https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 ```shell
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y git python-pip python3-pip python-all-dev
+sudo apt-get install -y python-pip python3-pip python-all-dev
+sudo apt-get install -y git tmux
 ```
 
 To set up SSH, check
@@ -59,6 +60,4 @@ are exposed (using https):
 - /hardware - View list of all hardware
 - /hardware/abcd - View hardware 'abcd'
 - /hardware/abcd/set/3 - Set hardware 'abcd' value to 3
-
-
 

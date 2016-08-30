@@ -64,6 +64,7 @@ class ViewController: UIViewController {
         statusLabel.sizeToFit()
         statusLabel.frame = CGRect(x: self.view.frame.origin.x, y: ipAddressInput.frame.maxY + 8,
                                    width: self.view.frame.width, height: statusLabel.bounds.height)
+        self.view.sendSubviewToBack(statusLabel)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +86,9 @@ class ViewController: UIViewController {
         if statusLabel.superview == nil {
             self.view.addSubview(statusLabel)
         }
+        
+        // Close keyboard
+        self.view.endEditing(true)
     }
     
     func stop() {

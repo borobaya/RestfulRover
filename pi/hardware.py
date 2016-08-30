@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from RPi import GPIO
+import logger
 
 motor_freq = 50 # Motor PWM frequency in Hz
 
@@ -22,12 +23,12 @@ class Hardware():
             self.pinForward = int(args['pinForward'])
             self.pinBackward = int(args['pinBackward'])
             if not self.pinControl==self.pinForward==self.pinBackward==0:
-                print("Using pin", self.pinControl)
+                logger.info("Using pin " + str(self.pinControl))
                 GPIO.setup(self.pinControl, GPIO.OUT)
                 self.pwm = GPIO.PWM(self.pinControl, motor_freq)
-                print("Using pin", self.pinForward)
+                logger.info("Using pin " + str(self.pinForward))
                 GPIO.setup(self.pinForward, GPIO.OUT)
-                print("Using pin", self.pinBackward)
+                logger.info("Using pin " + str(self.pinBackward))
                 GPIO.setup(self.pinBackward, GPIO.OUT)
 
     def updatePins(self):

@@ -12,7 +12,7 @@ import UIKit
 class MjpegView : UIImageView, NSURLSessionDataDelegate {
     
     let uv4lServer = Config.uv4lUrl
-    let urlResizeRequest = "panel?width=60&height=40&format=875967048&134217741=10" // Last parameter is the framerate
+    let urlResizeRequest = "panel?width=192&height=128&format=875967048&134217741=10" // Last parameter is the framerate
     let urlMjpegStream = "stream/video.mjpeg"
     
     var endMarkerData = NSData()

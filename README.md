@@ -50,3 +50,22 @@ sudo service uv4l_raspicam restart
 ```
 
 
+## To auto-start Rasberry Pi Hardware Controls on boot-up
+
+1. Copy 'RunRestfulRover.sh' to the home directory:
+
+  `cp RunRestfulRover.sh ~`
+
+2. Modify 'RunRestfulRover.sh'
+
+   The second line (`cd /home/pi/RestfulRover`) should point to the repository's directory.
+
+3. Edit /etc/rc.local
+
+  `sudo nano /etc/rc.local`
+
+  Before 'exit 0' add:
+
+  `sh /home/pi/RunRestfulRover.sh &`
+
+
