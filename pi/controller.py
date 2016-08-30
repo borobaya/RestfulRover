@@ -32,7 +32,7 @@ class Controller():
                 self.HardwareHandler.add(hardware_type, h['args'])
 
     def process(self, msg):
-        logger.log('Received message: %s' % (msg))
+        logger.info('Received message: %s' % (msg))
         msg_parts = msg.split()
         resps = {}
 
