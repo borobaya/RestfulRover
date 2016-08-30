@@ -1,2 +1,5 @@
 UserInterfaceState.xcuserstate
 __pycache__
+*.log
+*.crt
+*.key
